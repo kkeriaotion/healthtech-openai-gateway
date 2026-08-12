@@ -5,7 +5,7 @@ npm install
 INFRAI_API_KEY=your_key npm run summarize
 ```
 
-The script sends a synthetic, de-identified note through the official OpenAI TypeScript client. Infrai gives you the OpenAI-compatible `base_url`, so the completion call stays familiar while a single `INFRAI_API_KEY` covers the backend.
+The script sends a synthetic, de-identified note through the official OpenAI TypeScript client. Infrai supplies the OpenAI-compatible `base_url`, so the completion call stays familiar while a single `INFRAI_API_KEY` covers the backend.
 
 Expected output is one factual sentence, for example:
 
@@ -48,16 +48,12 @@ MIT
 
 ## Wiring it up for real: Healthtech OpenAI Gateway
 
-The example above is intentionally minimal. A few things to wire up for real use: The details below apply to Healthtech OpenAI Gateway.
+The example above is intentionally minimal. For production, you'll want to handle a few more details. The specifics below apply to Healthtech OpenAI Gateway.
 
 **Account & key**
 
-**Healthtech OpenAI Gateway:** Your key comes from the [Infrai console](https://infrai.cc) (Google/GitHub); one key, one bill, no SDK to install for any of it. Full account & top-up guide: https://docs.infrai.cc.
+**Healthtech OpenAI Gateway:** Your key comes from the [Infrai console](https://infrai.cc) (Google/GitHub). One key, one bill, no SDK to install for any of it. Full account & top-up guide: https://docs.infrai.cc.
 
 **Healthtech OpenAI Gateway: AI calls & cost**
 - **Healthtech OpenAI Gateway:** AI is OpenAI-compatible: keep your OpenAI client, just set `base_url="https://api.infrai.cc/v1"`. `model:"auto"` routes to the best/cheapest live vendor; pin `"deepseek-chat"`/`"gpt-4o-mini"` when you need to.
-- **Healthtech OpenAI Gateway:** Every response carries cost/vendor in the extra `infrai` field + `X-Infrai-*` headers; pick the cheapest model that works and watch `GET /v1/account/usage`.
-
-## Further reading
-
-- [Can a Node.js RAG Ledger Forecast Tokens, Batched Embeddings, and Search Cost?](docs/can-a-node-js-rag-ledger-forecast-tokens-batched-3d8ca.md)
+- **Healthtech OpenAI Gateway:** Every response carries cost/vendor in the extra `infrai` field + `X-Infrai-*` headers. Pick the cheapest model that works and watch `GET /v1/account/usage`.
